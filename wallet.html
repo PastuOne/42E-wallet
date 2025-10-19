@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>42WALLET — Prop UI</title>
+<style>
+  :root{--bg:#0f1724;--card:#0b1220;--accent:#00d4ff;--muted:#94a3b8;--danger:#ff4757}
+  body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif; margin:0; min-height:100vh; background:linear-gradient(180deg,#071021 0%, #081226 60%); color:#e6eef6; display:flex; align-items:center; justify-content:center; padding:32px;}
+  .wallet{width:420px; border-radius:14px; background:linear-gradient(180deg,var(--card), #071224); box-shadow: 0 10px 30px rgba(2,6,23,.6); padding:20px; position:relative; overflow:hidden;}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6fe7b1);display:flex;align-items:center;justify-content:center;color:#012; font-weight:800}
+  h1{font-size:18px;margin:0}
+  p.sub{margin:0;color:var(--muted);font-size:12px}
+  .balance{margin-top:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:14px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+  .amount{font-size:28px;font-weight:700}
+  .fiat{font-size:12px;color:var(--muted)}
+  .addr{margin-top:10px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted);font-size:13px}
+  .tx-list{margin-top:14px}
+  .tx{display:flex;justify-content:space-between;padding:10px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);font-size:13px}
+  .tx .meta{color:var(--muted); font-size:12px}
+  .demo-tag{position:absolute;left:12px;bottom:12px;background:rgba(255,69,90,.14);color:var(--danger);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  .controls{display:flex;gap:8px;margin-top:12px}
+  .small{font-size:12px;color:var(--muted)}
+  footer{margin-top:12px;text-align:center;color:var(--muted);font-size:11px}
+</style>
+</head>
+<body>
+  <div class="wallet">
+    <header>
+      <div class="logo">42</div>
+      <div>
+        <h1>42WALLET -  Trusted E-wallet</h1>
+        <p class="sub">Worldwidely trusted crypto-wallet - 42PRODUCTIONS</p>
+      </div>
+    </header>
+
+    <div class="balance">
+      <div>
+        <div class="amount" id="amount">SOL 125,431.00</div>
+        <div class="fiat" id="fiat">≈ $274,862,500.00</div>
+      </div>
+      <div style="text-align:right">
+        <div class="small">Portfolio</div>
+   
+      </div>
+    </div>
+
+    <div class="addr">
+      <div id="address">0xABCD...1234</div>
+      <div><button class="btn" onclick="copyAddr()">Copy</button></div>
+    </div>
+
+    <div class="tx-list" id="txlist">
+      <!-- transactions inserted by JS -->
+    </div>
+
+    <div class="controls">
+      <button class="btn" onclick="toggleLarge()">Toggle Ultra-Large</button>
+    <footer>Trusted E-wallet --- Transaction(s) available</footer>
+  </div>
+
+<script>
+  function randAddress(){
+    let s='0x';
+    const chars='0123456789ABCDEF';
+    for(let i=0;i<8;i++) s+=chars[Math.floor(Math.random()*chars.length)];
+    s+='...';
+    for(let i=0;i<4;i++) s+=chars[Math.floor(Math.random()*chars.length)];
+    return s;
+  }
+
+  function formatNum(n){ return n.toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2}) }
+
+  function randomize(){
+    const eth = (Math.random()*900000 + 500).toFixed(2); // 500–900500 as demo seed
+    const big = (Math.random()*200000 + 1000) * (Math.random()*1000 + 1000);
+    const displayEth = (Math.random()*90000 + 1000).toFixed(2);
+    document.getElementById('amount').textContent = 'SOL ' + formatNum(parseFloat(displayEth));
+    const fiat = parseFloat(displayEth) * (Math.random()*1400 + 900);
+    document.getElementById('fiat').textContent = '≈ $' + formatNum(fiat);
+    document.getElementById('address').textContent = randAddress();
+    populateTxs();
+  }
+
+  function populateTxs(){
+    const txlist = document.getElementById('txlist');
+    txlist.innerHTML='';
+    const n = 5 + Math.floor(Math.random()*6);
+    for(let i=0;i<n;i++){
+      const el = document.createElement('div');
+      el.className='tx';
+      const sign = Math.random()>0.5?'+':'-';
+      const amt = (Math.random()*9000 + 10).toFixed(2);
+      el.innerHTML = `<div>
+        <div style="font-weight:700">${sign} SOL ${formatNum(parseFloat(amt))}</div>
+        <div class="meta">${new Date(Date.now() - Math.random()*1000*60*60*24*90).toLocaleDateString()}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="meta">${Math.random()>0.5? 'Received' : 'Sent'}</div>
+        <div class="meta">TX ${Math.floor(Math.random()*1e8).toString(16).toUpperCase()}</div>
+      </div>`;
+      txlist.appendChild(el);
+    }
+  }
+
+  function copyAddr(){
+    navigator.clipboard?.writeText(document.getElementById('address').textContent).then(()=>alert('Address copied'));
+  }
+
+  function toggleLarge(){
+    const amt = document.getElementById('amount');
+    amt.style.fontSize = (amt.style.fontSize === '48px') ? '28px' : '48px';
+  }
+
+  function toggleMark(){
+    const t = document.getElementById('demoTag');
+    t.style.display = (t.style.display === 'none') ? 'block' : 'none';
+  }
+
+  // init
+  randomize();
+</script>
+</body>
+</html>
