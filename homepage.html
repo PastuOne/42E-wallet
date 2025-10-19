@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>42Crypto-Wallet — Secure Your Assets</title>
+  <style>
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --accent: #00d4ff;
+      --muted: #94a3b8;
+      --danger: #ff4757;
+    }
+
+    body {
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #071021 0%, #081226 60%);
+      color: #e6eef6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .logo-box {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #6fe7b1);
+      color: #012;
+      padding: 40px 60px;
+      border-radius: 20px;
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(2,6,23,.6);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 24px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 80px;
+    }
+
+    .feature {
+      background: linear-gradient(180deg, var(--card), #071224);
+      box-shadow: 0 10px 30px rgba(2,6,23,.4);
+      border-radius: 14px;
+      padding: 24px;
+      width: 280px;
+      margin: 12px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .feature-text {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .why {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 80px;
+    }
+
+    .why h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .why p {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    @media (max-width: 600px) {
+      .logo-box {
+        font-size: 28px;
+        padding: 30px 40px;
+      }
+
+      .feature {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="logo-box">42Crypto-Wallet</div>
+      <div class="subtitle">Secure. Private. Decentralized. Your trusted crypto companion.</div>
+      <div class="buttons">
+        <button class="btn" onclick="window.location.href='wallet.html'">Open Wallet</button>
+        <button class="btn">Learn More</button>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Top-tier Security</div>
+        <div class="feature-text">Your keys, your coins. Protected with advanced encryption.</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Lightning Fast</div>
+        <div class="feature-text">Instant transactions across major blockchains, anytime.</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Multi-Chain Ready</div>
+        <div class="feature-text">Manage SOL, ETH, BTC, and more — all in one place.</div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why">
+      <h2>Why Choose 42Crypto-Wallet?</h2>
+      <p>42Crypto-Wallet is built for crypto users who demand speed, security, and simplicity. Whether you're trading NFTs or managing a diverse portfolio, our wallet keeps your assets safe and your experience smooth.</p>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 42Productions. All rights reserved. | Secure your future with crypto.
+  </footer>
+
+</body>
+</html>
